@@ -18,8 +18,8 @@ class ResponseClova:
 
 
 class Clova:
-    def __init__(self):
-        self.request_json = {
+    def __init__(self): # self = class Clova  ->> 네이버에 보내주는 형식 세팅
+        self.request_json = { # 네이버 clova 요청 형식
             'images': [
                 {
                     'format': 'jpg',
@@ -30,7 +30,7 @@ class Clova:
             'version': 'V2',
             'timestamp': int(round(time.time() * 1000))
         }
-        self.payload = {'message': json.dumps(self.request_json).encode('UTF-8')}
+        self.payload = {'message': json.dumps(self.request_json).encode('UTF-8')} # payload=데이터 / request_json 에 있는 형식을 payload에 담음
         self.headers = {
         'X-OCR-SECRET': config.SECRET_KEY
         }
@@ -73,12 +73,28 @@ class Clova:
         return ResponseClova(True, res['images'][0]['message'], data )
 
 
-async def main():
+    #async def preprocessing(self):
+         # 1. , 없애주는 기능
+        #transformed_string = get_menu.x.data.replace(",","")
+        #print(transformed_string)
+        # 1. 홀/짝 구분
+    
+
+
+
+async def get_menu():
     url = "http://image.auction.co.kr/itemimage/12/00/f4/1200f4a0f6.jpg"
     clova = Clova()
-    x = await clova.ocr_transform(url)
-    print(x.status)
-    print(x.message)
-    print(x.data)
+    x = await clova.ocr_transform(url) # url = s3버켓에 저장될 메뉴판 이미지 url
+    lst = []
+    for data in x.data:
+        lst.append(data.replace(".","").replace(",",""))
+    print(lst)
+    #print(x.status)
+    #print(x.message)
+    #print(x.data)
 
-asyncio.run(main())
+asyncio.run(get_menu())
+
+
+

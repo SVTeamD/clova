@@ -81,6 +81,7 @@ class Clova:
         # 3. 글자~~~~~숫자까지
         #4. int형 바꾸기
     
+<<<<<<< HEAD:test_main.py
 
 def temp_replace_func(data):
     return data.replace(".","").replace(",","").replace(":","")
@@ -128,3 +129,31 @@ asyncio.run(get_menu())
 
 # 가게 간판까지 해야한다..!!
 얘기 다시 해보기
+=======
+
+
+
+async def get_menu():
+    url = "http://image.auction.co.kr/itemimage/12/00/f4/1200f4a0f6.jpg"
+    clova = Clova()
+    x = await clova.ocr_transform(url) 
+    lst = []
+    for data in x.data:
+        lst.append(data.replace(".","").replace(",","").replace(":",""))
+    
+
+    
+    
+    
+    
+    
+    #print(lst) -> 이거
+    #print(x.status)
+    #print(x.message)
+    #print(x.data)
+
+asyncio.run(get_menu())
+
+
+
+>>>>>>> b4f0a9419bb9e27b3ed216bc985818efc39bf1d8:main.py

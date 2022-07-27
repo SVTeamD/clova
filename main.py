@@ -74,10 +74,12 @@ class Clova:
 
 
     #async def preprocessing(self):
-         # 1. , 없애주는 기능
+         # 1. , 없애주는 기능 -완료
         #transformed_string = get_menu.x.data.replace(",","")
         #print(transformed_string)
-        # 1. 홀/짝 구분
+        # 2. 홀/짝 구분
+        # 3. 글자~~~~~숫자까지
+        #4. int형 바꾸기
     
 
 
@@ -85,11 +87,18 @@ class Clova:
 async def get_menu():
     url = "http://image.auction.co.kr/itemimage/12/00/f4/1200f4a0f6.jpg"
     clova = Clova()
-    x = await clova.ocr_transform(url) # url = s3버켓에 저장될 메뉴판 이미지 url
+    x = await clova.ocr_transform(url) 
     lst = []
     for data in x.data:
-        lst.append(data.replace(".","").replace(",",""))
-    print(lst)
+        lst.append(data.replace(".","").replace(",","").replace(":",""))
+    
+
+    
+    
+    
+    
+    
+    #print(lst) -> 이거
     #print(x.status)
     #print(x.message)
     #print(x.data)

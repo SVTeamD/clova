@@ -87,23 +87,46 @@ class Clova:
 async def get_menu():
     url = "http://image.auction.co.kr/itemimage/12/00/f4/1200f4a0f6.jpg"
     clova = Clova()
-    x = await clova.ocr_transform(url) 
+    x = await clova.ocr_transform(url)  # url = s3버켓에 저장될 메뉴판 이미지 url
     lst = []
-    for data in x.data:
+    for data in x.data: # 콤마 제거
         lst.append(data.replace(".","").replace(",","").replace(":",""))
+    
+    
     
 
     
     
     
-    
-    
-    #print(lst) -> 이거
-    #print(x.status)
-    #print(x.message)
-    #print(x.data)
+    print(lst)
+    print(x.status)
+    print(x.message)
+    print(x.data)
 
 asyncio.run(get_menu())
 
+# 삭제?
+
+def temp_replace_func(data):
+    return data.replace(".","").replace(",","").replace(":","")
+
+
+temp_lst = ["짜장", "5,000", "짬뽕", "7000", "순두부", "6500", "제육볶음", "7300","500"]
+lst = []
+price_lst = []
+
+for index, data in enumerate(temp_lst):
+        temp_var  = temp_replace_func(data)
+
+        lst.append(temp_var)
+        if "00" in temp_var:
+            price_lst.append(index)
+for x in price_lst:
+    if "00" not in lst[x-1]:
+        print(lst[x-1])
+        print(int(lst[x]))
+        print("===============")
+
+        
 
 
